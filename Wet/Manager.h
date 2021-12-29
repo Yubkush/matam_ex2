@@ -16,7 +16,7 @@ namespace mtm
             set<Employee*> employees;
         public:
             //c'tors and d'tor
-            Manager(const unsigned int id, const string first_name, const string last_name, const int birth_year);
+            Manager(const int id, const string first_name, const string last_name, const int birth_year);
             ~Manager() = default;
             Manager(const Manager& manager) = default;
 
@@ -26,7 +26,7 @@ namespace mtm
 
             //manage employees
             void addEmployee(Employee* const employee_to_add);
-            void removeEmployee(unsigned int id_to_remove);
+            void removeEmployee(const int id_to_remove);
             void removeAllEmployees();
 
             //print

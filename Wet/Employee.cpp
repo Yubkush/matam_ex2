@@ -7,7 +7,7 @@ using mtm::Employee;
 
 namespace mtm
 {
-    Employee::Employee(const unsigned int id, const string first_name, const string last_name, const int birth_year):
+    Employee::Employee(const int id, const string first_name, const string last_name, const int birth_year):
             Citizen(id, first_name, last_name, birth_year), salary(INIT_VALUE), score(INIT_VALUE), skill_set()
     {
 
@@ -44,7 +44,7 @@ namespace mtm
         skill_set.insert(skill_to_learn);
     }
     
-    void Employee::forgetSkill(const unsigned int skill_id)
+    void Employee::forgetSkill(const int skill_id)
     {
         for (Skill skill : skill_set)
         {
@@ -56,7 +56,7 @@ namespace mtm
         throw mtm::DidNotLearnSkill();    
     }
     
-    bool Employee::hasSkill(const unsigned int skill_id) const
+    bool Employee::hasSkill(const int skill_id) const
     {
         for (Skill skill : skill_set)
         {
@@ -80,7 +80,7 @@ namespace mtm
         os << "Salary: " << salary << " Score: " << score << " Skills: \n";
         for (Skill skill : skill_set)
         {
-            os << skill.getName() << "\n";
+            os << skill;
         }
         return os;
     }

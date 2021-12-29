@@ -69,6 +69,12 @@ namespace mtm
         public:
             explicit CanNotHireManager() = default;
     };
+    class EmployeeNotAccepted : public Exception
+    {
+        public:
+            explicit EmployeeNotAccepted() = default;
+    };
+
 }
 
 #endif /* EXCEPTIONS_H_ */

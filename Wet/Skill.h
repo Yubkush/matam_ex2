@@ -12,14 +12,13 @@ namespace mtm
     class Skill 
     {
         private:
-            const unsigned int id;
+            const int id;
             const string name;
-            unsigned int required_points;
-            const unsigned int level;
+            int required_points;
         
         public:
             //c'tors and d'tor
-            Skill(const unsigned int id, const string name, unsigned int required_points, const unsigned int level);
+            Skill(const int id, const string name, int required_points);
             ~Skill() = default;
             Skill(const Skill& skill) = default;
             

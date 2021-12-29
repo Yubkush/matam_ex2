@@ -9,7 +9,7 @@ using std::set;
 
 namespace mtm
 {
-    Manager::Manager(const unsigned int id, const string first_name, const string last_name, const int birth_year):
+    Manager::Manager(const int id, const string first_name, const string last_name, const int birth_year):
             Citizen(id, first_name, last_name, birth_year), salary(INIT_VALUE), employees()
     {
 
@@ -36,7 +36,7 @@ namespace mtm
         employees.insert(employee_to_add);
     }
 
-    void Manager::removeEmployee(unsigned int id_to_remove)
+    void Manager::removeEmployee(const int id_to_remove)
     {
         for (Employee* employee : employees)
         {
@@ -54,8 +54,8 @@ namespace mtm
         for (Employee* employee : employees)
         {
             employee->setSalary(-(employee->getSalary()));
-            employees.erase(employee);
         }
+        employees.clear();
     }
     
     std::ostream& Manager::printShort(std::ostream& os) const

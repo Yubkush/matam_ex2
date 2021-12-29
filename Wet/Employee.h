@@ -19,7 +19,7 @@ namespace mtm
             set<Skill> skill_set;
         public:
             //c'tors and d'tor
-            Employee(const unsigned int id, const string first_name, const string last_name, const int birth_year);
+            Employee(const int id, const string first_name, const string last_name, const int birth_year);
             ~Employee() = default;
             Employee(const Employee& employee) = default;
             
@@ -31,8 +31,8 @@ namespace mtm
             
             //skill methods
             void learnSkill(const Skill& skill_to_learn);
-            void forgetSkill(const unsigned int skill_id);
-            bool hasSkill(const unsigned int skill_id) const;
+            void forgetSkill(const int skill_id);
+            bool hasSkill(const int skill_id) const;
 
             //print functions
             std::ostream& printShort(std::ostream& os) const;

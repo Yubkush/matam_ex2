@@ -10,14 +10,14 @@ namespace mtm
 {
     class Citizen{
         private:
-            const unsigned int id;
+            const int id;
             const string first_name;
             const string last_name;
             const int birth_year;
         
         public:
             //c'tors and d'tor
-            Citizen(const unsigned int id, const string first_name, const string last_name, const int birth_year);
+            Citizen(const int id, const string first_name, const string last_name, const int birth_year);
             virtual ~Citizen() = default;
             Citizen(const Citizen& citizen) = default;
 

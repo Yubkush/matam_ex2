@@ -2,8 +2,8 @@
 #include "exceptions.h"
 
 namespace mtm{
-    Skill::Skill(const unsigned int id, const string name, unsigned int required_points, const unsigned int level):
-    id(id), name(name), required_points(required_points), level(level)
+    Skill::Skill(const int id, const string name, int required_points):
+    id(id), name(name), required_points(required_points)
     {
 
     }
@@ -41,7 +41,7 @@ namespace mtm{
 
     ostream& operator<<(ostream& os, const Skill& skill)
     {
-        os << skill.name << " level: " << skill.level;
+        os << skill.name << "\n";
         return os;
     }
 

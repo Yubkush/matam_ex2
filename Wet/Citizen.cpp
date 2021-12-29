@@ -5,7 +5,7 @@ using std::string;
 
 namespace mtm
 {
-    Citizen::Citizen(const unsigned int id, const string first_name, const string last_name, const int birth_year):
+    Citizen::Citizen(const int id, const string first_name, const string last_name, const int birth_year):
         id(id), first_name(first_name), last_name(last_name), birth_year(birth_year)
     {
         

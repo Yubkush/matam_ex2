@@ -3,6 +3,7 @@
 
 #include "Employee.h"
 #include "Manager.h"
+#include "exceptions.h"
 
 using mtm::Manager;
 using mtm::Employee;
@@ -13,7 +14,7 @@ namespace mtm
     class WorkPlace
     {
         private:
-            const unsigned int id;
+            const int id;
             const string name;
             const unsigned int workers_salary;
             const unsigned int managers_salary;
@@ -21,7 +22,7 @@ namespace mtm
         public:
 
             //c'tors and d'tor
-            WorkPlace(const unsigned int id, const string name, 
+            WorkPlace(const int id, const string name, 
                     const unsigned int workers_salary,const unsigned int managers_salary);
             ~WorkPlace() = default;
             WorkPlace(const WorkPlace& workplace) = default;
@@ -32,16 +33,30 @@ namespace mtm
             int getWorkersSalary() const;
             int getManagersSalary() const;
 
+            bool isManagerInWorkplace(const int manager_id);
+            Manager* findManagerById(const int manager_id);
+
             //employee methods
             template <class Condition>
-            void hireEmployee(const Condition& condition, 
+            void hireEmployee(Condition& condition, 
                             Employee* const employee_to_hire, 
-                            const unsigned int manager_id);
-            void fireEmployee(const unsigned int employee_id, const unsigned int manager_id);
+                            const int manager_id)
+            {
+                if(!condition(employee_to_hire)){
+                    throw mtm::EmployeeNotSelected();
+                }
+                if(!isManagerInWorkplace(manager_id)){
+                    throw mtm::ManagerIsNotHired();
+                }
+                Manager* manager_of_employee = findManagerById(manager_id);
+                manager_of_employee->addEmployee(employee_to_hire);
+                employee_to_hire->setSalary(workers_salary);
+            }
+            void fireEmployee(const int employee_id, const int manager_id);
 
             //manager methods
             void hireManager(Manager* const manager_to_hire);
-            void fireManager(const unsigned int manager_id_to_fire);
+            void fireManager(const int manager_id_to_fire);
 
             friend ostream& operator<<(ostream& os, const WorkPlace& workplace);
     };
