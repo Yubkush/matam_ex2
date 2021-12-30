@@ -32,7 +32,7 @@ namespace mtm
         return managers_salary;
     }
 
-    Manager* WorkPlace::findManagerById(const int manager_id)
+    Manager* WorkPlace::findManagerById(const int manager_id) const
     {
         for(Manager* manager : managers){
             if(manager->getId() == manager_id){
@@ -42,7 +42,7 @@ namespace mtm
         return NULL;
     }
 
-    bool WorkPlace::isManagerInWorkplace(const int manager_id)
+    bool WorkPlace::isManagerInWorkplace(const int manager_id) const
     {
         if(findManagerById(manager_id) != NULL){
             return true;

@@ -75,6 +75,47 @@ namespace mtm
             explicit EmployeeNotAccepted() = default;
     };
 
+    class EmployeeAlreadyExists: public Exception
+    {
+        public:
+            explicit EmployeeAlreadyExists() = default;
+    };
+    class ManagerAlreadyExists: public Exception
+    {
+        public:
+            explicit ManagerAlreadyExists() = default;
+    };
+    class FacultyAlreadyExists: public Exception
+    {
+        public:
+            explicit FacultyAlreadyExists() = default;
+    };
+    class WorkplaceAlreadyExists: public Exception
+    {
+        public:
+            explicit WorkplaceAlreadyExists() = default;
+    };
+    class EmployeeDoesNotExist: public Exception
+    {
+        public:
+            explicit EmployeeDoesNotExist() = default;
+    };
+    class ManagerDoesNotExist: public Exception
+    {
+        public:
+            explicit ManagerDoesNotExist() = default;
+    };
+    class FacultyDoesNotExist: public Exception
+    {
+        public:
+            explicit FacultyDoesNotExist() = default;
+    };
+    class WorkplaceDoesNotExist: public Exception
+    {
+        public:
+            explicit WorkplaceDoesNotExist() = default;
+    };
+    
 }
 
 #endif /* EXCEPTIONS_H_ */

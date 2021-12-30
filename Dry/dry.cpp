@@ -1,8 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-
-#define BadInput -1
+#include <exception>
 
 using std::vector;
 using std::exception;
@@ -10,11 +9,18 @@ using std::cout;
 using std::endl;
 using std::shared_ptr;
 
+class BadInput : std::exception
+{
+    public:
+        explicit BadInput() = default;
+};
+
+
 template <class T>
 std::vector<T> slice(std::vector<T> vec, int start, int step, int stop)
 {
     if(start<0 || start>=vec.size() || stop<0 || stop>vec.size() || step<=0){
-        throw BadInput;
+        throw BadInput();
     }
     if(start >= stop){
         vector<T> empty;

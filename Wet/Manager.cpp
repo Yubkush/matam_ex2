@@ -57,6 +57,17 @@ namespace mtm
         }
         employees.clear();
     }
+
+    bool Manager::isEmployeeEmployed(const int employee_id) const
+    {
+        for (Employee* employee : employees)
+        {
+            if(employee->getId() == employee_id){
+                return true;
+            }
+        }
+        return false;
+    }
     
     std::ostream& Manager::printShort(std::ostream& os) const
     {

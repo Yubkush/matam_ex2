@@ -33,8 +33,8 @@ namespace mtm
             int getWorkersSalary() const;
             int getManagersSalary() const;
 
-            bool isManagerInWorkplace(const int manager_id);
-            Manager* findManagerById(const int manager_id);
+            Manager* findManagerById(const int manager_id) const;
+            bool isManagerInWorkplace(const int manager_id) const;
 
             //employee methods
             template <class Condition>

@@ -21,13 +21,14 @@ namespace mtm
             Manager(const Manager& manager) = default;
 
             //getters and setters
-            int getSalary() const;
+            int getSalary() const override;
             void setSalary(const int salary_to_add);
 
             //manage employees
             void addEmployee(Employee* const employee_to_add);
             void removeEmployee(const int id_to_remove);
             void removeAllEmployees();
+            bool isEmployeeEmployed(const int employee_id) const;
 
             //print
             std::ostream& printShort(std::ostream& os) const;

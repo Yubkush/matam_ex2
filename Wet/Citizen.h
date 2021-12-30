@@ -26,6 +26,7 @@ namespace mtm
             string getFirstName() const;
             string getLastName() const;
             int getBirthYear() const;
+            virtual int getSalary() const = 0;
 
             //virtual functions
             virtual std::ostream& printShort(std::ostream& os) const = 0;

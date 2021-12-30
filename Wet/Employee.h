@@ -24,7 +24,7 @@ namespace mtm
             Employee(const Employee& employee) = default;
             
             //getters and setters
-            int getSalary() const;
+            int getSalary() const override;
             int getScore() const;
             void setSalary(const int salary_to_add);
             void setScore(const int score_to_add);
