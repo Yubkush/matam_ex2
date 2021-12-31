@@ -29,6 +29,7 @@ namespace mtm
         if(managers.find(id) != managers.end()){
             throw mtm::ManagerAlreadyExists();
         }
+        managers.insert({id, manager_to_add});
         Manager* ptr_to_manager = &((*(managers.find(id))).second);
         citizens.insert({id, ptr_to_manager});
     }
