@@ -1,0 +1,8 @@
+#include "Skill.h"
+#include "Citizen.h"
+#include "exceptions.h"
+#include "Employee.h"
+#include "Manager.h"
+#include "WorkPlace.h"
+#include "Faculty.h"
+#include "City.h"
