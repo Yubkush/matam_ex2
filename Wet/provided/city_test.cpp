@@ -1,9 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Employee.h"
-#include "Manager.h"
-#include "WorkPlace.h"
-#include "City.h"
+#include "../solution.h"
 #include <assert.h>
 #include "exceptions.h"
 
@@ -30,25 +27,25 @@ public:
 
 /*return true if same*/
 
-static bool fileEqual(FILE *file1, FILE *file2) {
-    int c1, c2;
-    do {
-        c1 = fgetc(file1);
-        c2 = fgetc(file2);
-    } while (c1 != EOF && c2 != EOF && c1 == c2);
-    return (c1 == EOF && c2 == EOF);
-}
+// static bool fileEqual(FILE *file1, FILE *file2) {
+//     int c1, c2;
+//     do {
+//         c1 = fgetc(file1);
+//         c2 = fgetc(file2);
+//     } while (c1 != EOF && c2 != EOF && c1 == c2);
+//     return (c1 == EOF && c2 == EOF);
+// }
 
-static bool wholeFileEqual(const char *filename1, const char *filename2) {
-    FILE *file1 = fopen(filename1, "r");
-    FILE *file2 = fopen(filename2, "r");
-    assert(file1);
-    assert(file2);
-    bool result = fileEqual(file1, file2);
-    fclose(file1);
-    fclose(file2);
-    return result;
-}
+// static bool wholeFileEqual(const char *filename1, const char *filename2) {
+//     FILE *file1 = fopen(filename1, "r");
+//     FILE *file2 = fopen(filename2, "r");
+//     assert(file1);
+//     assert(file2);
+//     bool result = fileEqual(file1, file2);
+//     fclose(file1);
+//     fclose(file2);
+//     return result;
+// }
 
 /*************************************************************************/
 
@@ -73,9 +70,6 @@ int main() {
     city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
     city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
     city.fireEmployeeAtWorkplace(12,104,10001);
-    // std::ofstream city_test_main_output;
-    // city_test_main_output.open(OUTPUT);
-    // city_test_main_output << "printAllAboveSalary output: " << endl;
     cout << "printAllAboveSalary output: " << endl;
     city.printAllAboveSalary(cout,1000);
     cout << endl << "printAllEmployeesWithSkill output" << endl;
