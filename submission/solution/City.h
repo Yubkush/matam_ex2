@@ -22,7 +22,7 @@ namespace mtm
             map<const int, Employee> employees;
             map<const int ,Manager> managers;
             map<const int, WorkPlace> work_places;
-            map<const int, Faculty> faculties;
+            map<const int, Faculty<Condition>> faculties;
         public:
             //c'tors and d'tor
             City(const string name);
@@ -32,8 +32,21 @@ namespace mtm
             //add methods
             void addEmployee(const int id, const string first_name, const string last_name, const int birth_year);
             void addManager(const int id, const string first_name, const string last_name, const int birth_year);
+            
             void addFaculty(const int id, const Skill skill, const unsigned int add_points, 
-                            bool (*admissionCondition)(Employee*));
+                            Condition *admission_condition)
+            {
+                try{
+                    faculties.at(id);
+                }
+                catch(std::out_of_range& e){
+                    Faculty<Condition> faculty_to_add(id, skill, add_points, admission_condition);
+                    faculties.insert({id, faculty_to_add});
+                    return;
+                }
+                throw mtm::FacultyAlreadyExists();
+            }
+
             void createWorkPlace(const int id, const string name, 
                                 const unsigned int workers_salary,const unsigned int managers_salary);
             
