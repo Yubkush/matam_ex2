@@ -75,15 +75,10 @@ namespace mtm
             explicit EmployeeNotAccepted() = default;
     };
 
-    class EmployeeAlreadyExists: public Exception
+    class CitizenAlreadyExists: public Exception
     {
         public:
-            explicit EmployeeAlreadyExists() = default;
-    };
-    class ManagerAlreadyExists: public Exception
-    {
-        public:
-            explicit ManagerAlreadyExists() = default;
+            explicit CitizenAlreadyExists() = default;
     };
     class FacultyAlreadyExists: public Exception
     {

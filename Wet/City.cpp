@@ -15,8 +15,8 @@ namespace mtm
     void City::addEmployee(const int id, const string first_name, const string last_name, const int birth_year)
     {
         Employee employee_to_add(id, first_name, last_name, birth_year);
-        if(employees.find(id) != employees.end()){
-            throw mtm::EmployeeAlreadyExists();
+        if(citizens.find(id) != citizens.end()){
+            throw mtm::CitizenAlreadyExists();
         }
         employees.insert({id, employee_to_add});
         Employee* ptr_to_employee = &((*(employees.find(id))).second);
@@ -26,8 +26,8 @@ namespace mtm
     void City::addManager(const int id, const string first_name, const string last_name, const int birth_year)
     {
         Manager manager_to_add(id, first_name, last_name, birth_year);
-        if(managers.find(id) != managers.end()){
-            throw mtm::ManagerAlreadyExists();
+        if(citizens.find(id) != citizens.end()){
+            throw mtm::CitizenAlreadyExists();
         }
         managers.insert({id, manager_to_add});
         Manager* ptr_to_manager = &((*(managers.find(id))).second);
