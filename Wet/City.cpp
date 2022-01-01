@@ -11,7 +11,17 @@ namespace mtm
     {
 
     }
-    
+
+    // City::~City()
+    // {
+    //     map<const int, Faculty<Condition>*>::iterator itr = faculties.begin();
+    //     if (itr != faculties.end())
+    //     {
+    //         delete itr->second;
+    //         faculties.erase(itr);
+    //     }
+    // }
+
     void City::addEmployee(const int id, const string first_name, const string last_name, const int birth_year)
     {
         Employee employee_to_add(id, first_name, last_name, birth_year);
@@ -32,20 +42,6 @@ namespace mtm
         managers.insert({id, manager_to_add});
         Manager* ptr_to_manager = &((*(managers.find(id))).second);
         citizens.insert({id, ptr_to_manager});
-    }
-
-    void City::addFaculty(const int id, const Skill skill, const unsigned int add_points, 
-                        bool (*admissionCondition)(Employee*))
-    {
-        Faculty faculty_to_add(id, admissionCondition, skill, add_points);
-        try{
-            faculties.at(id);
-        }
-        catch(std::out_of_range& e){
-            faculties.insert({id, faculty_to_add});
-            return;
-        }
-        throw mtm::FacultyAlreadyExists();
     }
 
     void City::createWorkPlace(const int id, const string name, 
