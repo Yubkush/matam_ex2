@@ -7,6 +7,7 @@
 #include "exceptions.h"
 #include "WorkPlace.h"
 #include "Faculty.h"
+#include <stdexcept>
 #include <map>
 
 using std::map;
@@ -22,7 +23,7 @@ namespace mtm
             map<const int, Employee> employees;
             map<const int ,Manager> managers;
             map<const int, WorkPlace> work_places;
-            map<const int, Faculty<Condition>> faculties;
+            map<const int, Faculty<Condition> > faculties;
         public:
             //c'tors and d'tor
             City(const string name);

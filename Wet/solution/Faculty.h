@@ -18,9 +18,9 @@ namespace mtm
     {
         private:
             const int id;
-            Condition *admission_condition;
             const Skill skill;
             const unsigned int add_points;
+            Condition *admission_condition;
         public:
             //c'tors and d'tor
             Faculty(const int id, const Skill skill,
