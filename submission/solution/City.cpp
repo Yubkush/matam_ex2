@@ -12,16 +12,6 @@ namespace mtm
 
     }
 
-    // City::~City()
-    // {
-    //     map<const int, Faculty<Condition>*>::iterator itr = faculties.begin();
-    //     if (itr != faculties.end())
-    //     {
-    //         delete itr->second;
-    //         faculties.erase(itr);
-    //     }
-    // }
-
     void City::addEmployee(const int id, const string first_name, const string last_name, const int birth_year)
     {
         Employee employee_to_add(id, first_name, last_name, birth_year);
