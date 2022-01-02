@@ -20,11 +20,11 @@ namespace mtm
             const int id;
             const Skill skill;
             const unsigned int add_points;
-            Condition *admission_condition;
+            Condition_T *admission_condition;
         public:
             //c'tors and d'tor
             Faculty(const int id, const Skill skill,
-                        const unsigned int add_points, Condition *admission_condition):
+                        const unsigned int add_points, Condition_T *admission_condition):
                     id(id), skill(skill), add_points(add_points), admission_condition(admission_condition)
             {
 
