@@ -1,38 +1,38 @@
-#include "WorkPlace.h"
+#include "Workplace.h"
 #include "exceptions.h"
 
-using mtm::WorkPlace;
+using mtm::Workplace;
 
 namespace mtm
 {
-    WorkPlace::WorkPlace(const int id, const string name, 
+    Workplace::Workplace(const int id, const string name, 
                     const unsigned int workers_salary,const unsigned int managers_salary):
                     id(id), name(name), workers_salary(workers_salary), managers_salary(managers_salary), managers()
     {
         
     }
     
-    int WorkPlace::getID() const
+    int Workplace::getID() const
     {
         return id;
     }
 
-    string WorkPlace::getName() const
+    string Workplace::getName() const
     {
         return name;
     }
 
-    int WorkPlace::getWorkersSalary() const
+    int Workplace::getWorkersSalary() const
     {
         return workers_salary;
     }
 
-    int WorkPlace::getManagersSalary() const
+    int Workplace::getManagersSalary() const
     {
         return managers_salary;
     }
 
-    Manager* WorkPlace::findManagerById(const int manager_id) const
+    Manager* Workplace::findManagerById(const int manager_id) const
     {
         for(Manager* manager : managers){
             if(manager->getId() == manager_id){
@@ -42,7 +42,7 @@ namespace mtm
         return NULL;
     }
 
-    bool WorkPlace::isManagerInWorkplace(const int manager_id) const
+    bool Workplace::isManagerInWorkplace(const int manager_id) const
     {
         if(findManagerById(manager_id) != NULL){
             return true;
@@ -50,7 +50,7 @@ namespace mtm
         return false;
     }
 
-    void WorkPlace::fireEmployee(const int employee_id, const int manager_id)
+    void Workplace::fireEmployee(const int employee_id, const int manager_id)
     {
         if(!isManagerInWorkplace(manager_id)){
             throw mtm::ManagerIsNotHired();
@@ -59,7 +59,7 @@ namespace mtm
         manager_of_employee->removeEmployee(employee_id);
     }
 
-    void WorkPlace::hireManager(Manager* const manager_to_hire)
+    void Workplace::hireManager(Manager* const manager_to_hire)
     {
         if(managers.find(manager_to_hire) != managers.end()){
             throw mtm::ManagerAlreadyHired();
@@ -71,7 +71,7 @@ namespace mtm
         manager_to_hire->setSalary(managers_salary);
     }
 
-    void WorkPlace::fireManager(const int manager_id_to_fire)
+    void Workplace::fireManager(const int manager_id_to_fire)
     {
         if(!isManagerInWorkplace(manager_id_to_fire)){
             throw mtm::ManagerIsNotHired();
@@ -82,7 +82,7 @@ namespace mtm
         managers.erase(manager_to_fire);
     }
     
-    ostream& operator<<(ostream& os, const WorkPlace& workplace)
+    ostream& operator<<(ostream& os, const Workplace& workplace)
     {
         os << "Workplace name - " << workplace.name;
         if(!workplace.managers.empty()){

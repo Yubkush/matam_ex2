@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Employee.h"
 #include "Manager.h"
-#include "WorkPlace.h"
+#include "Workplace.h"
 #include "City.h"
 #include <assert.h>
 #include "exceptions.h"
@@ -45,7 +45,7 @@ int main() {
     city.teachAtFaculty(11,1002);
     city.teachAtFaculty(12,1001);
     city.teachAtFaculty(13,1001);
-    city.createWorkPlace(10001, "Meta", 10000, 20000);
+    city.createWorkplace(10001, "Meta", 10000, 20000);
     city.hireManagerAtWorkplace(104,10001);
     HiringCondition hiringCondition;
     city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);

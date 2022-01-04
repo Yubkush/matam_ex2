@@ -92,5 +92,5 @@ namespace mtm{
         Skill sum = skill;
         return sum += add;
     }
-}
+};
 

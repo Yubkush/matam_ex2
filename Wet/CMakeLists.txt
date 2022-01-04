@@ -21,7 +21,7 @@ set(CMAKE_CPP_FLAGS ${MTM_FLAGS_DEBUG})
 set(SKILL_CPP_FILES Skill.cpp)
 set(EMPLOYEE_CPP_FILES Citizen.cpp Employee.cpp)
 set(MANAGER_CPP_FILES Manager.cpp)
-set(WORKPLACE_CPP_FILES WorkPlace.cpp)
+set(WORKPLACE_CPP_FILES Workplace.cpp)
 set(FACULTY_CPP_FILES Faculty.cpp)
 set(CITY_CPP_FILES City.cpp city_test.cpp)
 
