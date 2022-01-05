@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../WorkPlace.h"
+#include "../Workplace.h"
 #include <cassert>
 
 using namespace mtm;
@@ -21,8 +21,8 @@ class Condition_level{
 };
     
 int main() {
-    WorkPlace Meta(1,"Meta", 10000, 20000);
-    WorkPlace Amazon(2, "Amazon", 5000, 9000);
+    Workplace Meta(1,"Meta", 10000, 20000);
+    Workplace Amazon(2, "Amazon", 5000, 9000);
     Employee* e1 = new Employee(1, "John", "Williams", 2002);
     Employee* e2 = new Employee(2, "Alex", "Martinez", 2000);
     Employee* e3 = new Employee(3, "Bruce", "Wayne", 1972);

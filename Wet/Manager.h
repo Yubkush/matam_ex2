@@ -3,6 +3,7 @@
 
 #include "Employee.h"
 #include "Citizen.h"
+#include "pointer_compare.h"
 
 using mtm::Citizen;
 using mtm::Employee;
@@ -16,7 +17,7 @@ namespace mtm
     {
         private:
             int salary;
-            set<Employee*> employees;
+            set<Employee*, mtm::PointerCompare> employees;
         public:
             //c'tor
             Manager(const int id, const string first_name, const string last_name, const int birth_year);

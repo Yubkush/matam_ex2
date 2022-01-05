@@ -142,7 +142,7 @@ namespace mtm
             if(manager.second.isEmployeeEmployed(employee_id)){
                 for (const pair<const int, Workplace> work_place : work_places){
                     if((work_place.second).isManagerInWorkplace(manager.second.getId())){
-                        return (work_place.second).getID();
+                        return (work_place.second).getId();
                     }
                 }      
             }
@@ -164,7 +164,7 @@ namespace mtm
         return (employee1_Workplace_id == employee2_Workplace_id && employee1_Workplace_id != UNEMPLOYED);
     }
     
-    int City::printAllAboveSalary(std::ostream& os, const int salary) const
+    int City::getAllAboveSalary(std::ostream& os, const int salary) const
     {
         int citizens_above_salary = 0;
         for(const pair<const int, Citizen*> citizen : citizens)

@@ -206,7 +206,7 @@ namespace mtm
              * @param salary - Lower bound of the citizens' salaries.
              * @return Number of citizens with a salary equal or greater than the given salary.
              */
-            int printAllAboveSalary(std::ostream& os, const int salary) const;
+            int getAllAboveSalary(std::ostream& os, const int salary) const;
 
             /**
              * @brief Prints a short desription of all the employees in the city 

@@ -4,6 +4,7 @@
 #include "Employee.h"
 #include "Manager.h"
 #include "exceptions.h"
+#include "pointer_compare.h"
 
 using mtm::Manager;
 using mtm::Employee;
@@ -18,7 +19,7 @@ namespace mtm
             const string name;
             const unsigned int workers_salary;
             const unsigned int managers_salary;
-            set<Manager*> managers;
+            set<Manager*, mtm::PointerCompare> managers;
         public:
 
             //c'tors and d'tor
@@ -52,7 +53,7 @@ namespace mtm
              * 
              * @return int - workplace id
              */
-            int getID() const;
+            int getId() const;
 
             /**
              * @brief return workplace name

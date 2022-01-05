@@ -12,7 +12,7 @@ namespace mtm
         
     }
     
-    int Workplace::getID() const
+    int Workplace::getId() const
     {
         return id;
     }
