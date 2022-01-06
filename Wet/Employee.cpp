@@ -36,7 +36,7 @@ namespace mtm
         }
     }
     
-    void Employee::learnSkill(const Skill& skill_to_learn)
+    void Employee::learnSkill(const Skill skill_to_learn)
     {
         if(skill_set.find(skill_to_learn) != skill_set.end()){
             throw mtm::SkillAlreadyLearned();

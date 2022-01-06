@@ -31,9 +31,12 @@ namespace mtm
     void Employee::setScore(const int score_to_add)
     {
         score += score_to_add;
+        if(score < 0){
+            score = 0;
+        }
     }
     
-    void Employee::learnSkill(const Skill& skill_to_learn)
+    void Employee::learnSkill(const Skill skill_to_learn)
     {
         if(skill_set.find(skill_to_learn) != skill_set.end()){
             throw mtm::SkillAlreadyLearned();
@@ -77,7 +80,7 @@ namespace mtm
     {
         os << this->getFirstName() << " " << this->getLastName() << "\n";
         os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << "\n";
-        os << "Salary: " << salary << " Score: " << score << " Skills: \n";
+        os << "Salary: " << salary << " Score: " << score << " Skills:\n";
         for (Skill skill : skill_set)
         {
             os << skill;

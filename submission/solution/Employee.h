@@ -76,7 +76,7 @@ namespace mtm
              * 
              * @param skill - Skill to add to the employee's skill set
              */
-            void learnSkill(const Skill& skill_to_learn);
+            void learnSkill(const Skill skill_to_learn);
             
             /**
              * @brief Removes the skill with the given ID fromthe employee's skill set.

@@ -657,7 +657,7 @@ bool testFaculty()
     faculty3.teach(&e3);
     print("Print_Long_after_skill_teach" , out);
     e3.printLong(out);
-    Skill skill9(800,"TEST_FACULTY_WITHOUT_CLASS_Condition",80);
+    Skill skill9(800,"TEST_FACULTY_WITHOUT_CLASS_Condition",5);
     Condition3 condition3;
     Faculty<Condition3> faculty5(3,skill9,80,&condition3);
     e3.setSalary(9);
