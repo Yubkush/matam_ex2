@@ -18,7 +18,7 @@ namespace mtm
     class City
     {
         private:
-            const string name;
+            string name;
             map<const int, Citizen* const> citizens;
             map<const int, Employee> employees;
             map<const int ,Manager> managers;
@@ -44,7 +44,11 @@ namespace mtm
              * 
              * @param city - city to be copied
              */
-            City(const City& city) = default;
+            City(const City& city);
+            
+            City& operator=(const City& city);
+
+            void copyCity(const City& city);
 
             //add methods
             /**

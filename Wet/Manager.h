@@ -32,6 +32,7 @@ namespace mtm
              * @return int 
              */
             int getSalary() const override;
+
             /**
              * @brief Set the Salary object
              * 
@@ -46,17 +47,23 @@ namespace mtm
              * @param employee_to_add employee added
              */
             void addEmployee(Employee* const employee_to_add);
+
             /**
              * @brief remove employee from manager's responsibility 
              * 
              * @param id_to_remove employee id to remove
              */
+
             void removeEmployee(const int id_to_remove);
+
             /**
              * @brief remove all employees under manager
              * 
              */
             void removeAllEmployees();
+
+            void emptyEmployeeGroup();
+
             /**
              * @brief check if employee work under the manager
              * 
@@ -74,6 +81,7 @@ namespace mtm
              * @return std::ostream& 
              */
             std::ostream& printShort(std::ostream& os) const;
+
             /**
              * @brief prints manager full name, id, birthyear, salary and all employees
              * 
@@ -81,6 +89,7 @@ namespace mtm
              * @return std::ostream& 
              */
             std::ostream& printLong(std::ostream& os) const;
+
             /**
              * @brief create a copy of manager
              * 

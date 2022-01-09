@@ -93,6 +93,10 @@ namespace mtm
              */
             bool isManagerInWorkplace(const int manager_id) const;
 
+            int getManagerIdOfEmployee(const int employee_id) const;
+            void emptyWorkPlace();
+            void hireEmployeeWithoutCondition(Employee* const employee_to_hire, const int manager_id);
+
             //employee methods
             /**
              * @brief Adds a given employee that fulfills the recruitment condition, 
