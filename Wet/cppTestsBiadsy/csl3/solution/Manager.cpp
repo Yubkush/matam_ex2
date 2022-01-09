@@ -97,12 +97,5 @@ namespace mtm
     Manager* Manager::clone() const
     {
         return new Manager(*this);
-        // Manager* manager_clone = new Manager(*this);
-        // (manager_clone->employees).clear();
-        // for (Employee* employee : this->employees)
-        // {
-        //     (manager_clone->employees).insert((*employee).clone());
-        // }
-        // return manager_clone;
     }
 }

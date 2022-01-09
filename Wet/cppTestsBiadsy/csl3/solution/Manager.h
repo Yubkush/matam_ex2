@@ -62,6 +62,10 @@ namespace mtm
              */
             void removeAllEmployees();
 
+            /**
+             * @brief remove all employees under manager without changing their salary
+             * 
+             */
             void emptyEmployeeGroup();
 
             /**

@@ -18,7 +18,7 @@ namespace mtm
     class City
     {
         private:
-            const string name;
+            string name;
             map<const int, Citizen* const> citizens;
             map<const int, Employee> employees;
             map<const int ,Manager> managers;
@@ -44,7 +44,35 @@ namespace mtm
              * 
              * @param city - city to be copied
              */
-            City(const City& city) = default;
+            City(const City& city);
+            
+            /**
+             * @brief Copy assigns city to this city
+             * 
+             * @param city City whose values are assigned to this city
+             * @return City& this city after assignment
+             */
+            City& operator=(const City& city);
+
+            /**
+             * @brief Removes all managers from all workplaces and all employees from all managers
+             * 
+             */
+            void resetCity();
+
+            /**
+             * @brief Copies the hierarchy of the given city into our city
+             * 
+             * @param city - City whose hierarchy will be copied
+             */
+            void copyHiring(const City& city);
+
+            /**
+             * @brief copies the given city to our city
+             * 
+             * @param city city to be copied
+             */
+            void copyCity(const City& city);
 
             //add methods
             /**
@@ -123,13 +151,13 @@ namespace mtm
                                          const int manager_id, const int Workplace_id)
             {
                 try{
-                    citizens.at(employee_id);
+                    employees.at(employee_id);
                 }
                 catch(std::out_of_range& e){
                     throw mtm::EmployeeDoesNotExist();
                 }
                 try{
-                    citizens.at(manager_id);
+                    managers.at(manager_id);
                 }
                 catch(std::out_of_range& e){
                     throw mtm::ManagerDoesNotExist();
@@ -206,7 +234,7 @@ namespace mtm
              * @param salary - Lower bound of the citizens' salaries.
              * @return Number of citizens with a salary equal or greater than the given salary.
              */
-            int printAllAboveSalary(std::ostream& os, const int salary) const;
+            int getAllAboveSalary(std::ostream& os, const int salary) const;
 
             /**
              * @brief Prints a short desription of all the employees in the city 

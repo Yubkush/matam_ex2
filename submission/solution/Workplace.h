@@ -4,6 +4,7 @@
 #include "Employee.h"
 #include "Manager.h"
 #include "exceptions.h"
+#include "pointer_compare.h"
 
 using mtm::Manager;
 using mtm::Employee;
@@ -18,7 +19,7 @@ namespace mtm
             const string name;
             const unsigned int workers_salary;
             const unsigned int managers_salary;
-            set<Manager*> managers;
+            set<Manager*, mtm::PointerCompare> managers;
         public:
 
             //c'tors and d'tor
@@ -52,7 +53,7 @@ namespace mtm
              * 
              * @return int - workplace id
              */
-            int getID() const;
+            int getId() const;
 
             /**
              * @brief return workplace name
@@ -91,6 +92,29 @@ namespace mtm
              * @return false - manager is not employed at the workplace
              */
             bool isManagerInWorkplace(const int manager_id) const;
+
+            /**
+             * @brief Get the manager Id Of the employee with the given id.
+             * If the employee is not hired by any manager in the workplace, throw EmployeeIsNotHired.
+             * 
+             * @param employee_id - given employee id
+             * @return int - manager Id boss of the employee
+             */
+            int getManagerIdOfEmployee(const int employee_id) const;
+
+            /**
+             * @brief remove all managers and employees from workplace without changing their salary
+             * 
+             */
+            void emptyWorkPlace();
+
+            /**
+             * @brief hiring an employee to workplace without condition
+             * 
+             * @param employee_to_hire
+             * @param manager_id - manager that the employee will be in their group
+             */
+            void hireEmployeeWithoutCondition(Employee* const employee_to_hire, const int manager_id);
 
             //employee methods
             /**

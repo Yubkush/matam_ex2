@@ -15,8 +15,8 @@ namespace mtm
     class Skill 
     {
         private:
-            const int id;
-            const string name;
+            int id;
+            string name;
             int required_points;
         
         public:

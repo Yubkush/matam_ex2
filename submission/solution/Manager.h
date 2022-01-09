@@ -3,6 +3,7 @@
 
 #include "Employee.h"
 #include "Citizen.h"
+#include "pointer_compare.h"
 
 using mtm::Citizen;
 using mtm::Employee;
@@ -16,7 +17,7 @@ namespace mtm
     {
         private:
             int salary;
-            set<Employee*> employees;
+            set<Employee*, mtm::PointerCompare> employees;
         public:
             //c'tor
             Manager(const int id, const string first_name, const string last_name, const int birth_year);
@@ -31,6 +32,7 @@ namespace mtm
              * @return int 
              */
             int getSalary() const override;
+
             /**
              * @brief Set the Salary object
              * 
@@ -45,17 +47,27 @@ namespace mtm
              * @param employee_to_add employee added
              */
             void addEmployee(Employee* const employee_to_add);
+
             /**
              * @brief remove employee from manager's responsibility 
              * 
              * @param id_to_remove employee id to remove
              */
+
             void removeEmployee(const int id_to_remove);
+
             /**
              * @brief remove all employees under manager
              * 
              */
             void removeAllEmployees();
+
+            /**
+             * @brief remove all employees under manager without changing their salary
+             * 
+             */
+            void emptyEmployeeGroup();
+
             /**
              * @brief check if employee work under the manager
              * 
@@ -73,6 +85,7 @@ namespace mtm
              * @return std::ostream& 
              */
             std::ostream& printShort(std::ostream& os) const;
+
             /**
              * @brief prints manager full name, id, birthyear, salary and all employees
              * 
@@ -80,6 +93,7 @@ namespace mtm
              * @return std::ostream& 
              */
             std::ostream& printLong(std::ostream& os) const;
+
             /**
              * @brief create a copy of manager
              * 

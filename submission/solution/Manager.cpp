@@ -58,6 +58,11 @@ namespace mtm
         employees.clear();
     }
 
+    void Manager::emptyEmployeeGroup()
+    {
+        employees.clear();
+    }
+
     bool Manager::isEmployeeEmployed(const int employee_id) const
     {
         for (Employee* employee : employees)

@@ -46,11 +46,32 @@ namespace mtm
              */
             City(const City& city);
             
-            
+            /**
+             * @brief Copy assigns city to this city
+             * 
+             * @param city City whose values are assigned to this city
+             * @return City& this city after assignment
+             */
             City& operator=(const City& city);
 
+            /**
+             * @brief Removes all managers from all workplaces and all employees from all managers
+             * 
+             */
             void resetCity();
+
+            /**
+             * @brief Copies the hierarchy of the given city into our city
+             * 
+             * @param city - City whose hierarchy will be copied
+             */
             void copyHiring(const City& city);
+
+            /**
+             * @brief copies the given city to our city
+             * 
+             * @param city city to be copied
+             */
             void copyCity(const City& city);
 
             //add methods
