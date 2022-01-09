@@ -78,38 +78,38 @@ print_with_two_groups_copy_constructor_after_delete_group_of_Omar_Sharafy
 Workplace name - Meta Groups:
 Manager Robert stark
 id - 1 birth_year - 1980
-Salary: 20000
+Salary: 0
 Employees:
 John Williams
-Salary: 10000 Score: 0
+Salary: 0 Score: 0
 Alex Martinez
-Salary: 10000 Score: 0
+Salary: 0 Score: 0
 
-print_with_two_groups_check_if_the_original_is_not_modified
+print_with_two_groups_check_if_the_original_modified
 Workplace name - Meta Groups:
 Manager Robert stark
 id - 1 birth_year - 1980
-Salary: 20000
+Salary: 0
 Employees:
 John Williams
-Salary: 10000 Score: 0
+Salary: 0 Score: 0
 Alex Martinez
-Salary: 10000 Score: 0
+Salary: 0 Score: 0
 Manager omar sharafy
 id - 6 birth_year - 1990
-Salary: 20000
+Salary: 0
 Employees:
 Muhammad Ghanayem
-Salary: 10000 Score: 20
+Salary: 0 Score: 20
 
 print_after_delete_group_of_Robert_Stark
 Workplace name - Meta Groups:
 Manager omar sharafy
 id - 6 birth_year - 1990
-Salary: 20000
+Salary: 0
 Employees:
 Muhammad Ghanayem
-Salary: 10000 Score: 20
+Salary: 0 Score: 20
 
 print_after_delete_all_groups
 Workplace name - Meta

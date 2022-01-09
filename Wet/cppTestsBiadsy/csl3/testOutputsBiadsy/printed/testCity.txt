@@ -20,6 +20,9 @@ Alex Martinez
 Salary: 0 Score: 10
 Lionel Smith
 Salary: 0 Score: 10
+EmployeeDoesNotExist
+EmployeeDoesNotExist
+EmployeeDoesNotExist
 CitizenAlreadyExists
 CitizenAlreadyExists
 FacultyAlreadyExists
@@ -37,6 +40,10 @@ WorkplaceDoesNotExist
 ManagerDoesNotExist
 WorkplaceDoesNotExist
 CitizenAlreadyExists
+CitizenAlreadyExists
+EmployeeDoesNotExist
+ManagerDoesNotExist
+WorkplaceDoesNotExist
 John Williams
 Salary: 0 Score: 25
 Alex Martinez
@@ -75,4 +82,4 @@ Alex Martinez
 Salary: 0 Score: 10
 Lionel Smith
 Salary: 0 Score: 10
-test operator = getAllAboveSalary check if the original does not modified
+test operator = getAllAboveSalary check if the original modified

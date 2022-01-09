@@ -159,6 +159,7 @@ template <class T> void print(const T& x, ofstream& stream) { stream << x << end
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
 bool testSkill() {
     OPEN_FILE(out, FILE_PATH + std::string("/printed/testSkill.txt"));
     Skill s1(1,"Python",15);
@@ -433,7 +434,7 @@ bool testManager() {
     m77.addEmployee(&e1);
     out << "test_copy_constructor_after_add_employee" << endl;
     m77.printLong(out);
-    out << "check_if_the_original_is_not_modified" << endl;
+    out << "check_if_the_original_modified" << endl;
     m1.printLong(out);
     Manager* clone_m6 = m6.clone();
     ASSERT_TEST(*clone_m6 == m6);
@@ -441,6 +442,7 @@ bool testManager() {
     ASSERT_TEST(clone_m6->getSalary() == m6.getSalary());
     ASSERT_TEST(clone_m6->getFirstName() == m6.getFirstName());
     ASSERT_TEST(clone_m6->getLastName() == m6.getLastName());
+    e2.setScore(50);
     clone_m6->printLong(out);
     out.close();
     delete clone_m1;
@@ -547,12 +549,12 @@ bool testWorkplace() {
     print("print_with_two_groups_copy_constructor",out);
     print(copy_constructor_meta, out);
     copy_meta.fireManager(m1->getId());
-    copy_constructor_meta.fireManager(m2->getId());
     print("print_with_two_groups_operator_=_after_delete_group_of_Robert_Stark",out);
     print(copy_meta, out);
+    copy_constructor_meta.fireManager(m2->getId());
     print("print_with_two_groups_copy_constructor_after_delete_group_of_Omar_Sharafy",out);
     print(copy_constructor_meta, out);
-    print("print_with_two_groups_check_if_the_original_is_not_modified",out);
+    print("print_with_two_groups_check_if_the_original_modified",out);
     print(Meta, out);
     Meta.fireManager(m1->getId());
     print("print_after_delete_group_of_Robert_Stark",out);
@@ -579,7 +581,7 @@ bool testWorkplace() {
     out.close();
     delete e1;
     delete e2;
-	delete e3;
+    delete e3;
     delete m1;
     delete m2;
     ASSERT(matchFiles(fileName, FILE_PATH + std::string("/expected/testWorkplace.txt")));
@@ -718,8 +720,8 @@ bool testCity()
     Skill skill1(1,"Programming with c++",0);
     Skill skill2(2,"Programming with c",10);
     city.addEmployee(11, "John", "Williams", 2002);
-    city.addEmployee(12, "Alex", "Martinez", 2000);
     city.addEmployee(13, "Lionel", "Smith", 2000);
+    city.addEmployee(12, "Alex", "Martinez", 2000);
     city.addManager(104,"Mohamad","Masarwa",1998);
     FacultyCondition1 fc1;
     FacultyCondition3 fc3;
@@ -739,6 +741,7 @@ bool testCity()
     ASSERT_TEST(city.isWorkingInTheSameWorkplace(11,12));
     ASSERT_TEST(city.isWorkingInTheSameWorkplace(12,13));
     city.fireEmployeeAtWorkplace(12,104,10001);
+    ASSERT_TEST(!city.isWorkingInTheSameWorkplace(12,11));
     print("printAllAboveSalary output: " ,out);
     city.getAllAboveSalary(out,1000);
     print("printAllEmployeesWithSkill output",out);
@@ -748,6 +751,30 @@ bool testCity()
     city.getAllAboveSalary(out,1000);
     print( "printAllEmployeesWithSkill output" ,out);
     city.printAllEmployeesWithSkill(out, 1);
+    try
+    {
+        city.isWorkingInTheSameWorkplace(80,90);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.isWorkingInTheSameWorkplace(11,90);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.isWorkingInTheSameWorkplace(80,11);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
     try
     {
         city.addEmployee(11,"can_not_add","lets_try",0);
@@ -886,6 +913,39 @@ bool testCity()
     {
         out << "CitizenAlreadyExists" << endl;
     }
+    try
+    {
+        city.addManager(11,"citizen_already_exists","chack",1999);
+    }
+    catch (mtm::CitizenAlreadyExists&)
+    {
+        out << "CitizenAlreadyExists" << endl;
+    }
+    HiringCondition1 hiringCondition1;
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,10,104,10001);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,11,12,10001);
+    }
+    catch (mtm::ManagerDoesNotExist&)
+    {
+        out << "ManagerDoesNotExist" << endl;
+    }
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,11,104,1000);
+    }
+    catch (mtm::WorkplaceDoesNotExist&)
+    {
+        out << "WorkplaceDoesNotExist" << endl;
+    }
     ASSERT_TEST(city.getAllAboveSalary(out,0) == 4);
     ASSERT_TEST(city.getAllAboveSalary(out,5000) == 0);
     City copy_city = city;
@@ -895,17 +955,16 @@ bool testCity()
     city.printAllEmployeesWithSkill(out,1);
     copy_city.printAllEmployeesWithSkill(out,1);
     copy_city.hireManagerAtWorkplace(104,10001);
-    out << "test operator = getAllAboveSalary check if the original does not modified" << endl;
+    out << "test operator = getAllAboveSalary check if the original modified" << endl;
     ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
     copy_city.addEmployee(79,"Adi","Williams",1790);
-    HiringCondition1 hiringCondition1;
     copy_city.hireEmployeeAtWorkplace(hiringCondition1,79,104,10001);
     ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
-    Skill skill3(88,"run_c++_tests",10);
+    Skill skill3(88,"run_c++_tests",0);
     FacultyCondition5 facultyCondition5;
     copy_city.addFaculty(1003,skill3,20,&facultyCondition5);
     copy_city.teachAtFaculty(79,1003);
-    out << "test operator = printAllEmployeesWithSkill check if the original does not modified" << endl;
+    out << "test operator = printAllEmployeesWithSkill check if the original modified" << endl;
     city.printAllEmployeesWithSkill(out,88);
     copy_city.printAllEmployeesWithSkill(out,88);
     City copy_constructor_city(city);
@@ -915,18 +974,18 @@ bool testCity()
     city.printAllEmployeesWithSkill(out,1);
     copy_constructor_city.printAllEmployeesWithSkill(out,1);
     copy_constructor_city.hireManagerAtWorkplace(104,10001);
-    out << "test copy constructor getAllAboveSalary check if the original does not modified" << endl;
+    out << "test copy constructor getAllAboveSalary check if the original modified" << endl;
     ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
     copy_constructor_city.addEmployee(400,"Fahd","Williams",9999);
     copy_constructor_city.hireEmployeeAtWorkplace(hiringCondition1,400,104,10001);
     ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
     copy_constructor_city.addFaculty(1003,skill3,20,&facultyCondition5);
     copy_constructor_city.teachAtFaculty(400,1003);
-    out << "test copy constructor printAllEmployeesWithSkill check if the original does not modified" << endl;
+    out << "test copy constructor printAllEmployeesWithSkill check if the original modified" << endl;
     city.printAllEmployeesWithSkill(out,88);
     copy_constructor_city.printAllEmployeesWithSkill(out,88);
     copy_constructor_city.addManager(7001,"Muhammad","Biadsy",5000);
-    out << "test copy constructor getAllAboveSalary check if the original does not modified added another manager" << endl;
+    out << "test copy constructor getAllAboveSalary check if the original modified added another manager" << endl;
     ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,0)-2 == city.getAllAboveSalary(out,0));
     out.close();
     ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testCity.txt")));

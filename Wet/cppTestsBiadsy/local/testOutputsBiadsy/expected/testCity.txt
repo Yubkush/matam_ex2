@@ -20,6 +20,9 @@ Alex Martinez
 Salary: 0 Score: 10
 Lionel Smith
 Salary: 0 Score: 10
+EmployeeDoesNotExist
+EmployeeDoesNotExist
+EmployeeDoesNotExist
 CitizenAlreadyExists
 CitizenAlreadyExists
 FacultyAlreadyExists
@@ -37,6 +40,10 @@ WorkplaceDoesNotExist
 ManagerDoesNotExist
 WorkplaceDoesNotExist
 CitizenAlreadyExists
+CitizenAlreadyExists
+EmployeeDoesNotExist
+ManagerDoesNotExist
+WorkplaceDoesNotExist
 John Williams
 Salary: 0 Score: 25
 Alex Martinez
@@ -75,14 +82,14 @@ Alex Martinez
 Salary: 0 Score: 10
 Lionel Smith
 Salary: 0 Score: 10
-test operator = getAllAboveSalary check if the original does not modified
+test operator = getAllAboveSalary check if the original modified
 Mohamad Masarwa
 Salary: 20000
 Adi Williams
 Salary: 10000 Score: 0
 Mohamad Masarwa
 Salary: 20000
-test operator = printAllEmployeesWithSkill check if the original does not modified
+test operator = printAllEmployeesWithSkill check if the original modified
 Adi Williams
 Salary: 10000 Score: 20
 test copy constructor getAllAboveSalary
@@ -115,17 +122,17 @@ Alex Martinez
 Salary: 0 Score: 10
 Lionel Smith
 Salary: 0 Score: 10
-test copy constructor getAllAboveSalary check if the original does not modified
+test copy constructor getAllAboveSalary check if the original modified
 Mohamad Masarwa
 Salary: 20000
 Mohamad Masarwa
 Salary: 20000
 Fahd Williams
 Salary: 10000 Score: 0
-test copy constructor printAllEmployeesWithSkill check if the original does not modified
+test copy constructor printAllEmployeesWithSkill check if the original modified
 Fahd Williams
 Salary: 10000 Score: 20
-test copy constructor getAllAboveSalary check if the original does not modified added another manager
+test copy constructor getAllAboveSalary check if the original modified added another manager
 John Williams
 Salary: 0 Score: 25
 Alex Martinez

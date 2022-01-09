@@ -123,13 +123,13 @@ namespace mtm
                                          const int manager_id, const int Workplace_id)
             {
                 try{
-                    citizens.at(employee_id);
+                    employees.at(employee_id);
                 }
                 catch(std::out_of_range& e){
                     throw mtm::EmployeeDoesNotExist();
                 }
                 try{
-                    citizens.at(manager_id);
+                    managers.at(manager_id);
                 }
                 catch(std::out_of_range& e){
                     throw mtm::ManagerDoesNotExist();
