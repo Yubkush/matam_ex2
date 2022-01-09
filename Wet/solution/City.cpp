@@ -12,6 +12,72 @@ namespace mtm
 
     }
 
+    void City::resetCity()
+    {
+        for(pair<const int, Employee> employee : this->employees){
+            employee.second.setSalary(-employee.second.getSalary());
+            (this->citizens).insert({employee.second.getId(), &((this->employees).at(employee.second.getId()))});
+        }
+        for(pair<const int, Manager> manager : managers){
+            manager.second.setSalary(-manager.second.getSalary());
+            manager.second.emptyEmployeeGroup();
+            (this->citizens).insert({manager.second.getId(), &((this->managers).at(manager.second.getId()))});
+        }
+        for(pair<const int, Workplace> work_place : this->work_places){
+            work_place.second.emptyWorkPlace();
+        }
+    }
+
+    void City::copyHiring(const City& city)
+    {
+        for(pair<const int, Manager> manager : this->managers){
+            for(pair<const int, Workplace> work_place : city.work_places){
+                if(work_place.second.isManagerInWorkplace(manager.second.getId())){
+                    ((this->work_places).at(work_place.second.getId())).
+                            hireManager(&((this->managers).at(manager.second.getId())));
+                    break;
+                }
+            }
+        }
+        for(pair<const int, Employee> employee : this->employees){
+            for(pair<const int, Workplace> work_place : city.work_places){
+                try{
+                    const int manager_id = work_place.second.getManagerIdOfEmployee(employee.second.getId());
+                    ((this->work_places).at(work_place.second.getId())).
+                            hireEmployeeWithoutCondition(&((this->employees).at(employee.second.getId())), manager_id);
+                }
+                catch(mtm::EmployeeIsNotHired& e){
+                    continue;
+                }
+            }
+        }
+    }
+
+    void City::copyCity(const City& city)
+    {
+        this->name = city.name;
+        this->citizens = map<const int, Citizen* const>();
+        this->employees = city.employees;
+        this->managers = city.managers;
+        this->work_places = city.work_places;
+        this->faculties = city.faculties;
+        /* Reset all employees, managers, workplaces */
+        this->resetCity();
+        /* Hire according to hierarchy in the original city */
+        this->copyHiring(city);
+    }
+
+    City::City(const City& city)
+    {
+        copyCity(city);
+    }
+
+    City& City::operator=(const City& city)
+    {
+        copyCity(city);
+        return *this;
+    }
+
     void City::addEmployee(const int id, const string first_name, const string last_name, const int birth_year)
     {
         Employee employee_to_add(id, first_name, last_name, birth_year);
@@ -82,7 +148,7 @@ namespace mtm
     void City::hireManagerAtWorkplace(const int manager_id, const int Workplace_id)
     {
         try{
-            citizens.at(manager_id);
+            managers.at(manager_id);
         }
         catch(std::out_of_range& e){
             throw mtm::ManagerDoesNotExist();
@@ -99,13 +165,13 @@ namespace mtm
     void City::fireEmployeeAtWorkplace(const int employee_id, const int manager_id, const int Workplace_id)
     {
         try{
-            citizens.at(employee_id);
+            employees.at(employee_id);
         }
         catch(std::out_of_range& e){
             throw mtm::EmployeeDoesNotExist();
         }
         try{
-            citizens.at(manager_id);
+            managers.at(manager_id);
         }
         catch(std::out_of_range& e){
             throw mtm::ManagerDoesNotExist();
@@ -122,7 +188,7 @@ namespace mtm
     void City::fireManagerAtWorkplace(const int manager_id, const int Workplace_id)
     {
         try{
-            citizens.at(manager_id);
+            managers.at(manager_id);
         }
         catch(std::out_of_range& e){
             throw mtm::ManagerDoesNotExist();
@@ -142,7 +208,7 @@ namespace mtm
             if(manager.second.isEmployeeEmployed(employee_id)){
                 for (const pair<const int, Workplace> work_place : work_places){
                     if((work_place.second).isManagerInWorkplace(manager.second.getId())){
-                        return (work_place.second).getID();
+                        return (work_place.second).getId();
                     }
                 }      
             }
@@ -153,8 +219,8 @@ namespace mtm
     bool City::isWorkingInTheSameWorkplace(const int employee1_id, const int employee2_id)
     {
         try{
-            citizens.at(employee1_id);
-            citizens.at(employee2_id);
+            employees.at(employee1_id);
+            employees.at(employee2_id);
         }
         catch(std::out_of_range& e){
             throw mtm::EmployeeDoesNotExist();
@@ -164,7 +230,7 @@ namespace mtm
         return (employee1_Workplace_id == employee2_Workplace_id && employee1_Workplace_id != UNEMPLOYED);
     }
     
-    int City::printAllAboveSalary(std::ostream& os, const int salary) const
+    int City::getAllAboveSalary(std::ostream& os, const int salary) const
     {
         int citizens_above_salary = 0;
         for(const pair<const int, Citizen*> citizen : citizens)

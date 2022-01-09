@@ -1,18 +1,17 @@
 //
 // Created by Muhammad Biadsy on 01/01/2022.
 //
-#include "../../City.h"
-#include "../../exceptions.h"
+#include "solution/City.h"
+#include "solution/exceptions.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../../Skill.h"
-#include "../../Citizen.h"
-#include "../../Employee.h"
-#include "../../Manager.h"
-#include "../../Workplace.h"
-#include "../../Faculty.h"
-
+#include "solution/Skill.h"
+#include "solution/Citizen.h"
+#include "solution/Employee.h"
+#include "solution/Manager.h"
+#include "solution/Workplace.h"
+#include "solution/Faculty.h"
 
 using std::cout;
 using std::endl;
@@ -21,7 +20,7 @@ using std::ofstream;
 using mtm::Exception;
 using namespace mtm;
 
-const std::string FILE_PATH = "../cppTestsBiadsy/csl3/testOutputsBiadsy";
+const std::string FILE_PATH = "testOutputsBiadsy";
 
 
 /*************************************************************************/
@@ -616,7 +615,7 @@ public:
 bool testFaculty()
 {
     OPEN_FILE(out, FILE_PATH + std::string("/printed/testFaculty.txt"));
-    std::vector<Faculty<Condition>> Faculties;
+    std::vector<Faculty<Condition> > Faculties;
     FacultyCondition1 fc1;
     FacultyCondition2 fc2;
     Skill skill1(1,"Programming with c++",0);
