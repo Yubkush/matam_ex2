@@ -12,7 +12,7 @@ namespace mtm
         
     }
     
-    int Workplace::getID() const
+    int Workplace::getId() const
     {
         return id;
     }
@@ -48,6 +48,28 @@ namespace mtm
             return true;
         }
         return false;
+    }
+
+    int Workplace::getManagerIdOfEmployee(const int employee_id) const
+    {
+        for(Manager* manager : managers){
+            if(manager->isEmployeeEmployed(employee_id)){
+                return manager->getId();
+            }
+        }
+        throw EmployeeIsNotHired();
+    }
+
+    void Workplace::emptyWorkPlace()
+    {
+        managers.clear();
+    }
+
+    void Workplace::hireEmployeeWithoutCondition(Employee* const employee_to_hire, const int manager_id)
+    {
+        Manager* manager_of_employee = findManagerById(manager_id);
+        manager_of_employee->addEmployee(employee_to_hire);
+        employee_to_hire->setSalary(workers_salary);
     }
 
     void Workplace::fireEmployee(const int employee_id, const int manager_id)
