@@ -12,15 +12,8 @@ namespace mtm
 
     }
 
-    void City::copyCity(const City& city)
+    void City::resetCity()
     {
-        this->name = city.name;
-        this->citizens;
-        this->employees = city.employees;
-        this->managers = city.managers;
-        this->work_places = city.work_places;
-        this->faculties = city.faculties;
-        /* Reset all employees, managers, workplaces */
         for(pair<const int, Employee> employee : this->employees){
             employee.second.setSalary(-employee.second.getSalary());
             (this->citizens).insert({employee.second.getId(), &((this->employees).at(employee.second.getId()))});
@@ -33,7 +26,10 @@ namespace mtm
         for(pair<const int, Workplace> work_place : this->work_places){
             work_place.second.emptyWorkPlace();
         }
-        /* Hire according to hierarchy in the original city */
+    }
+
+    void City::copyHiring(const City& city)
+    {
         for(pair<const int, Manager> manager : this->managers){
             for(pair<const int, Workplace> work_place : city.work_places){
                 if(work_place.second.isManagerInWorkplace(manager.second.getId())){
@@ -55,6 +51,20 @@ namespace mtm
                 }
             }
         }
+    }
+
+    void City::copyCity(const City& city)
+    {
+        this->name = city.name;
+        this->citizens;
+        this->employees = city.employees;
+        this->managers = city.managers;
+        this->work_places = city.work_places;
+        this->faculties = city.faculties;
+        /* Reset all employees, managers, workplaces */
+        this->resetCity();
+        /* Hire according to hierarchy in the original city */
+        this->copyHiring(city);
     }
 
     City::City(const City& city)

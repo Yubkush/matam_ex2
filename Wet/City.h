@@ -46,8 +46,11 @@ namespace mtm
              */
             City(const City& city);
             
+            
             City& operator=(const City& city);
 
+            void resetCity();
+            void copyHiring(const City& city);
             void copyCity(const City& city);
 
             //add methods
