@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Employee.h"
 #include "Manager.h"
+#include "Faculty.h"
 #include "Workplace.h"
 #include "City.h"
-#include <assert.h>
-#include "exceptions.h"
+
 using namespace mtm;
 using std::cout;
 using std::endl;
@@ -52,13 +52,13 @@ int main() {
     city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
     city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
     city.fireEmployeeAtWorkplace(12,104,10001);
-    cout << "printAllAboveSalary output: " << endl;
-    city.printAllAboveSalary(cout,1000);
+    cout << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(cout,1000);
     cout << endl << "printAllEmployeesWithSkill output" << endl;
     city.printAllEmployeesWithSkill(cout, 1);
     city.fireManagerAtWorkplace(104,10001);
-    cout << "printAllAboveSalary output: " << endl;
-    city.printAllAboveSalary(cout,1000);
+    cout << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(cout,1000);
     cout << endl << "printAllEmployeesWithSkill output" << endl;
     city.printAllEmployeesWithSkill(cout, 1);
     return 0;
