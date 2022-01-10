@@ -131,7 +131,7 @@ namespace mtm
     void City::teachAtFaculty(const int employee_id, const int faculty_id)
     {
         try{
-            citizens.at(employee_id);
+            employees.at(employee_id);
         }
         catch(std::out_of_range& e){
             throw mtm::EmployeeDoesNotExist();

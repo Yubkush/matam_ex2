@@ -86,7 +86,9 @@ namespace mtm
         os << this->getFirstName() << " " << this->getLastName() << "\n";
         os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << "\n";
         os << "Salary: " << salary << "\n";
-        os << "Employees:" << "\n";
+        if(!employees.empty()){
+            os << "Employees: " << "\n";
+        }
         for (Employee* employee : employees)
         {
             employee->printShort(os);

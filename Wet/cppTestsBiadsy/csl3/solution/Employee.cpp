@@ -80,7 +80,11 @@ namespace mtm
     {
         os << this->getFirstName() << " " << this->getLastName() << "\n";
         os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << "\n";
-        os << "Salary: " << salary << " Score: " << score << " Skills:\n";
+        os << "Salary: " << salary << " Score: " << score;
+        if(!skill_set.empty()){
+            os << " Skills: ";
+        }
+        os << "\n";
         for (Skill skill : skill_set)
         {
             os << skill;

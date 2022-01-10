@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Workplace.h"
+#include "../solution/Workplace.h"
 using namespace mtm;
 using std::cout;
 using std::endl;

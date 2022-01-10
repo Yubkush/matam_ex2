@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Employee.h"
-#include "Manager.h"
-#include "Faculty.h"
-#include "Workplace.h"
-#include "City.h"
+#include "../solution/Employee.h"
+#include "../solution/Manager.h"
+#include "../solution/Faculty.h"
+#include "../solution/Workplace.h"
+#include "../solution/City.h"
 
 using namespace mtm;
 using std::cout;

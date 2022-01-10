@@ -1,17 +1,18 @@
 //
 // Created by Muhammad Biadsy on 01/01/2022.
 //
-#include "solution/City.h"
-#include "solution/exceptions.h"
+#include "../../City.h"
+#include "../../exceptions.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "solution/Skill.h"
-#include "solution/Citizen.h"
-#include "solution/Employee.h"
-#include "solution/Manager.h"
-#include "solution/Workplace.h"
-#include "solution/Faculty.h"
+#include "../../Skill.h"
+#include "../../Citizen.h"
+#include "../../Employee.h"
+#include "../../Manager.h"
+#include "../../Workplace.h"
+#include "../../Faculty.h"
+
 
 using std::cout;
 using std::endl;
@@ -20,7 +21,7 @@ using std::ofstream;
 using mtm::Exception;
 using namespace mtm;
 
-const std::string FILE_PATH = "testOutputsBiadsy";
+const std::string FILE_PATH = "../cppTestsBiadsy/csl3/testOutputsBiadsy";
 
 
 /*************************************************************************/
@@ -156,7 +157,6 @@ template <class T> void print(const T& x, ofstream& stream) { stream << x << end
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////*HERE START THE TESTS*//////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 bool testSkill() {
@@ -361,6 +361,9 @@ bool testEmployee() {
     ASSERT_TEST(clone_e99->getLastName() == e99.getLastName());
     ASSERT_TEST(clone_e99->getBirthYear() == e99.getBirthYear());
     clone_e99->printLong(out);
+    e99.forgetSkill(s1.getId());
+    e99.forgetSkill(s2.getId());
+    e99.printLong(out);
     out.close();
     delete clone_e1;
     delete clone_e99;
@@ -414,38 +417,21 @@ bool testManager() {
     ASSERT_TEST(m1.getSalary() == 0);
     m1.setSalary(55);
     ASSERT_TEST(m1.getSalary() == 55);
-    Manager m6 = m1;
-    ASSERT_TEST(m6 == m1);
-    ASSERT_TEST(m6.getBirthYear() == m1.getBirthYear());
-    ASSERT_TEST(m6.getSalary() == m1.getSalary());
-    ASSERT_TEST(m6.getFirstName() == m1.getFirstName());
-    ASSERT_TEST(m6.getLastName() == m1.getLastName());
-    out << "test_operator_=" << endl;
-    m6.printLong(out);
-    Manager m77(m1);
-    ASSERT_TEST(m77 == m1);
-    ASSERT_TEST(m77.getBirthYear() == m1.getBirthYear());
-    ASSERT_TEST(m77.getSalary() == m1.getSalary());
-    ASSERT_TEST(m77.getFirstName() == m1.getFirstName());
-    ASSERT_TEST(m77.getLastName() == m1.getLastName());
-    out << "test_copy_constructor" << endl;
-    m77.printLong(out);
-    m77.addEmployee(&e1);
-    out << "test_copy_constructor_after_add_employee" << endl;
-    m77.printLong(out);
     out << "check_if_the_original_modified" << endl;
     m1.printLong(out);
-    Manager* clone_m6 = m6.clone();
-    ASSERT_TEST(*clone_m6 == m6);
-    ASSERT_TEST(clone_m6->getBirthYear() == m6.getBirthYear());
-    ASSERT_TEST(clone_m6->getSalary() == m6.getSalary());
-    ASSERT_TEST(clone_m6->getFirstName() == m6.getFirstName());
-    ASSERT_TEST(clone_m6->getLastName() == m6.getLastName());
+    Manager* clone_m1_2 = m1.clone();
+    ASSERT_TEST(*clone_m1_2 == m1);
+    ASSERT_TEST(clone_m1_2->getBirthYear() == m1.getBirthYear());
+    ASSERT_TEST(clone_m1_2->getSalary() == m1.getSalary());
+    ASSERT_TEST(clone_m1_2->getFirstName() == m1.getFirstName());
+    ASSERT_TEST(clone_m1_2->getLastName() == m1.getLastName());
     e2.setScore(50);
-    clone_m6->printLong(out);
+    clone_m1_2->printLong(out);
+    m1.removeEmployee(2);
+    m1.printLong(out);
     out.close();
     delete clone_m1;
-    delete clone_m6;
+    delete clone_m1_2;
     ASSERT(matchFiles(fileName, FILE_PATH + std::string("/expected/testManager.txt")));
     return true;
 }
@@ -531,28 +517,8 @@ bool testWorkplace() {
     e3->setScore(20);
     Meta.hireManager(m2);
     Meta.hireEmployee(condition2,e3,6);
-    Workplace copy_meta = Meta;
-    Workplace copy_constructor_meta(Meta);
-    ASSERT_TEST(copy_meta.getId() == Meta.getId());
-    ASSERT_TEST(copy_meta.getName() == Meta.getName());
-    ASSERT_TEST(copy_meta.getWorkersSalary() == Meta.getWorkersSalary());
-    ASSERT_TEST(copy_meta.getManagersSalary() == Meta.getManagersSalary());
-    ASSERT_TEST(copy_constructor_meta.getId() == Meta.getId());
-    ASSERT_TEST(copy_constructor_meta.getName() == Meta.getName());
-    ASSERT_TEST(copy_constructor_meta.getWorkersSalary() == Meta.getWorkersSalary());
-    ASSERT_TEST(copy_constructor_meta.getManagersSalary() == Meta.getManagersSalary());
     print("print_with_two_groups",out);
     print(Meta, out);
-    print("print_with_two_groups_operator_=",out);
-    print(copy_meta, out);
-    print("print_with_two_groups_copy_constructor",out);
-    print(copy_constructor_meta, out);
-    copy_meta.fireManager(m1->getId());
-    print("print_with_two_groups_operator_=_after_delete_group_of_Robert_Stark",out);
-    print(copy_meta, out);
-    copy_constructor_meta.fireManager(m2->getId());
-    print("print_with_two_groups_copy_constructor_after_delete_group_of_Omar_Sharafy",out);
-    print(copy_constructor_meta, out);
     print("print_with_two_groups_check_if_the_original_modified",out);
     print(Meta, out);
     Meta.fireManager(m1->getId());
@@ -577,6 +543,12 @@ bool testWorkplace() {
     {
         print("ManagerIsNotHired" , out);
     }
+    Meta.hireManager(m2);
+    print("print_after_delete_all_groups_and_add_second_group_again",out);
+    print(Meta, out);
+    Meta.hireManager(m1);
+    print("print_after_delete_all_groups_and_add_two_groups_again",out);
+    print(Meta, out);
     out.close();
     delete e1;
     delete e2;
@@ -615,7 +587,7 @@ public:
 bool testFaculty()
 {
     OPEN_FILE(out, FILE_PATH + std::string("/printed/testFaculty.txt"));
-    std::vector<Faculty<Condition> > Faculties;
+    std::vector<Faculty<Condition>> Faculties;
     FacultyCondition1 fc1;
     FacultyCondition2 fc2;
     Skill skill1(1,"Programming with c++",0);
@@ -923,7 +895,7 @@ bool testCity()
     HiringCondition1 hiringCondition1;
     try
     {
-        city.hireEmployeeAtWorkplace(hiringCondition1,10,104,10001);
+        city.hireEmployeeAtWorkplace(hiringCondition1,104,10,10001);
     }
     catch (mtm::EmployeeDoesNotExist&)
     {
@@ -945,51 +917,155 @@ bool testCity()
     {
         out << "WorkplaceDoesNotExist" << endl;
     }
+    try
+    {
+        city.teachAtFaculty(104,1001);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
     ASSERT_TEST(city.getAllAboveSalary(out,0) == 4);
     ASSERT_TEST(city.getAllAboveSalary(out,5000) == 0);
-    City copy_city = city;
-    out << "test operator = getAllAboveSalary" << endl;
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,0) == city.getAllAboveSalary(out,0));
-    out << "test operator = printAllEmployeesWithSkill" << endl;
-    city.printAllEmployeesWithSkill(out,1);
-    copy_city.printAllEmployeesWithSkill(out,1);
-    copy_city.hireManagerAtWorkplace(104,10001);
-    out << "test operator = getAllAboveSalary check if the original modified" << endl;
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
-    copy_city.addEmployee(79,"Adi","Williams",1790);
-    copy_city.hireEmployeeAtWorkplace(hiringCondition1,79,104,10001);
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
-    Skill skill3(88,"run_c++_tests",0);
-    FacultyCondition5 facultyCondition5;
-    copy_city.addFaculty(1003,skill3,20,&facultyCondition5);
-    copy_city.teachAtFaculty(79,1003);
-    out << "test operator = printAllEmployeesWithSkill check if the original modified" << endl;
-    city.printAllEmployeesWithSkill(out,88);
-    copy_city.printAllEmployeesWithSkill(out,88);
-    City copy_constructor_city(city);
-    out << "test copy constructor getAllAboveSalary" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,0) == city.getAllAboveSalary(out,0));
-    out << "test copy constructor printAllEmployeesWithSkill" << endl;
-    city.printAllEmployeesWithSkill(out,1);
-    copy_constructor_city.printAllEmployeesWithSkill(out,1);
-    copy_constructor_city.hireManagerAtWorkplace(104,10001);
-    out << "test copy constructor getAllAboveSalary check if the original modified" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
-    copy_constructor_city.addEmployee(400,"Fahd","Williams",9999);
-    copy_constructor_city.hireEmployeeAtWorkplace(hiringCondition1,400,104,10001);
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
-    copy_constructor_city.addFaculty(1003,skill3,20,&facultyCondition5);
-    copy_constructor_city.teachAtFaculty(400,1003);
-    out << "test copy constructor printAllEmployeesWithSkill check if the original modified" << endl;
-    city.printAllEmployeesWithSkill(out,88);
-    copy_constructor_city.printAllEmployeesWithSkill(out,88);
-    copy_constructor_city.addManager(7001,"Muhammad","Biadsy",5000);
-    out << "test copy constructor getAllAboveSalary check if the original modified added another manager" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,0)-2 == city.getAllAboveSalary(out,0));
+    city.hireManagerAtWorkplace(104,10001);
+    ASSERT_TEST(city.getAllAboveSalary(out,5000) == 1);
+    city.fireManagerAtWorkplace(104,10001);
+    city.addManager(888,"moshe","moshe",1999);
+    city.hireManagerAtWorkplace(888,10001);
+    HiringCondition1 hiringCondition2;
+    city.hireEmployeeAtWorkplace(hiringCondition2,12,888,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition2,13,888,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition2,11,888,10001);
+    city.hireManagerAtWorkplace(104,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
+    city.fireManagerAtWorkplace(104,10001);
+    city.hireManagerAtWorkplace(104,10001);
+    ASSERT_TEST(city.getAllAboveSalary(out,5000) == 5);
     out.close();
     ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testCity.txt")));
     return true;
 }
+
+bool testEmployeeSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testEmployeeSegel.txt"));
+    Employee e1(1, "John", "Williams", 2002);
+    out << "Short Print" << endl;
+    e1.printShort(out);
+    out << "Long Print" << endl;
+    e1.printLong(out);
+    out << "----------" << endl;
+    Skill s1(1,"C++",0);
+    Skill s2(2, "Java", 0);
+    e1.learnSkill(s1);
+    e1.learnSkill(s2);
+    out << "Short Print" << endl;
+    e1.printShort(out);
+    out << "Long Print" << endl;
+    e1.printLong(out);
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testEmployeeSegel.txt")));
+    return true;
+}
+
+bool testManagerSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testManagerSegel.txt"));
+    Employee e1(1, "John", "Williams", 2002);
+    Skill s1(1,"C++",0);
+    Skill s2(2, "Java", 0);
+    Employee e2(2, "Alex", "Martinez", 2000);
+    e1.learnSkill(s1);
+    e1.learnSkill(s2);
+    e2.learnSkill(s2);
+    Manager m1(1,"Robert", "stark", 1980);
+    out << "Short Print" << endl;
+    m1.printShort(out);
+    out << "Long Print" << endl;
+    m1.printLong(out);
+    out << "----------" << endl;
+    m1.addEmployee(&e1);
+    m1.addEmployee(&e2);
+    out << "Short Print" << endl;
+    m1.printShort(out);
+    m1.setSalary(10000);
+    out << "Long Print" << endl;
+    m1.printLong(out);
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testManagerSegel.txt")));
+    return true;
+}
+
+class Condition4{
+public:
+    bool operator()(Employee* emp){
+        return emp->getId()>0;
+    }
+};
+
+bool testWorkplaceSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testWorkplaceSegel.txt"));
+    Workplace Meta(1,"Meta", 10000, 20000);
+    Employee* e1 = new Employee(1, "John", "Williams", 2002);
+    Employee* e2 = new Employee(2, "Alex", "Martinez", 2000);
+    Manager* m1 = new Manager(1,"Robert", "stark", 1980);
+    Meta.hireManager(m1);
+    Condition4 condition;
+    Meta.hireEmployee(condition,e1,m1->getId());
+    Meta.hireEmployee(condition,e2,m1->getId());
+    out << Meta;
+    Meta.fireEmployee(e1->getId(),m1->getId());
+    Meta.fireManager(m1->getId());
+    out << "-----------" << endl;
+    out << Meta;
+    out.close();
+    delete e1;
+    delete e2;
+    delete m1;
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testWorkplaceSegel.txt")));
+    return true;
+}
+
+bool testCitySegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testCitySegel.txt"));
+    City city ("TLV");
+    Skill skill1(1,"Programming with c++",0);
+    Skill skill2(2,"Programming with c",10);
+    city.addEmployee(11, "John", "Williams", 2002);
+    city.addEmployee(12, "Alex", "Martinez", 2000);
+    city.addEmployee(13, "Lionel", "Smith", 2000);
+    city.addManager(104,"Mohamad","Masarwa",1998);
+    FacultyCondition1 fc1;
+    FacultyCondition2 fc2;
+    city.addFaculty(1001, skill1, 10, &fc1);
+    city.addFaculty(1002, skill2, 15, &fc2);
+    city.teachAtFaculty(11,1001);
+    city.teachAtFaculty(11,1002);
+    city.teachAtFaculty(12,1001);
+    city.teachAtFaculty(13,1001);
+    city.createWorkplace(10001, "Meta", 10000, 20000);
+    city.hireManagerAtWorkplace(104,10001);
+    HiringCondition hiringCondition;
+    city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
+    city.fireEmployeeAtWorkplace(12,104,10001);
+    out << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(out,1000);
+    out << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(out, 1);
+    city.fireManagerAtWorkplace(104,10001);
+    out << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(out,1000);
+    out << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(out, 1);
+    out.close();
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testCitySegel.txt")));
+    return true;
+}
+
 
 
 /*The functions for the tests should be added here*/
@@ -999,7 +1075,11 @@ bool (*tests[]) (void) = {
         testManager,
         testWorkplace,
         testFaculty,
-		testCity,
+        testCity,
+        testEmployeeSegel,
+        testManagerSegel,
+        testWorkplaceSegel,
+        testCitySegel,
 };
 
 #define NUMBER_TESTS ((long)(sizeof(tests)/sizeof(*tests)))
@@ -1011,7 +1091,11 @@ const char* testNames[NUMBER_TESTS] = {
         "testManager",
         "testWorkplace",
         "testFaculty",
-		"testCity",
+        "testCity",
+        "testEmployeeSegel",
+        "testManagerSegel",
+        "testWorkplaceSegel",
+        "testCitySegel",
 };
 
 int main(int argc, char *argv[])
