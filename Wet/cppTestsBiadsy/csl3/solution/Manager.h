@@ -57,10 +57,11 @@ namespace mtm
             void removeEmployee(const int id_to_remove);
 
             /**
-             * @brief remove all employees under manager
+             * @brief Adds to all the employees of the manager the given amount
              * 
+             * @param salary_to_add 
              */
-            void removeAllEmployees();
+            void chanageEmployeeSalary(int salary_to_add);
 
             /**
              * @brief remove all employees under manager without changing their salary

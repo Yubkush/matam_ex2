@@ -1,6 +1,8 @@
 #include "Skill.h"
 #include "exceptions.h"
 
+using std::endl;
+
 namespace mtm{
     Skill::Skill(const int id, const string name, int required_points):
     id(id), name(name), required_points(required_points)
@@ -41,7 +43,7 @@ namespace mtm{
 
     ostream& operator<<(ostream& os, const Skill& skill)
     {
-        os << skill.name << "\n";
+        os << skill.name << endl;
         return os;
     }
 

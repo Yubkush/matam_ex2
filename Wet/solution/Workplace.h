@@ -93,29 +93,6 @@ namespace mtm
              */
             bool isManagerInWorkplace(const int manager_id) const;
 
-            /**
-             * @brief Get the manager Id Of the employee with the given id.
-             * If the employee is not hired by any manager in the workplace, throw EmployeeIsNotHired.
-             * 
-             * @param employee_id - given employee id
-             * @return int - manager Id boss of the employee
-             */
-            int getManagerIdOfEmployee(const int employee_id) const;
-
-            /**
-             * @brief remove all managers and employees from workplace without changing their salary
-             * 
-             */
-            void emptyWorkPlace();
-
-            /**
-             * @brief hiring an employee to workplace without condition
-             * 
-             * @param employee_to_hire
-             * @param manager_id - manager that the employee will be in their group
-             */
-            void hireEmployeeWithoutCondition(Employee* const employee_to_hire, const int manager_id);
-
             //employee methods
             /**
              * @brief Adds a given employee that fulfills the recruitment condition, 

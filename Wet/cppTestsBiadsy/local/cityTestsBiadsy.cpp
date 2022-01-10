@@ -1,18 +1,18 @@
 //
 // Created by Muhammad Biadsy on 01/01/2022.
 //
-#include "./solution/City.h"
-#include "./solution/exceptions.h"
+#include "../../City.h"
+#include "../../exceptions.h"
 #include <iostream>
 #include <memory>
 #include <fstream>
 #include <vector>
-#include "./solution/Skill.h"
-#include "./solution/Citizen.h"
-#include "./solution/Employee.h"
-#include "./solution/Manager.h"
-#include "./solution/Workplace.h"
-#include "./solution/Faculty.h"
+#include "../../Skill.h"
+#include "../../Citizen.h"
+#include "../../Employee.h"
+#include "../../Manager.h"
+#include "../../Workplace.h"
+#include "../../Faculty.h"
 
 
 using std::cout;
@@ -22,7 +22,7 @@ using std::ofstream;
 using mtm::Exception;
 using namespace mtm;
 
-const std::string FILE_PATH = "../testOutputsBiadsy";
+const std::string FILE_PATH = "../cppTestsBiadsy/csl3/testOutputsBiadsy";
 
 /*************************************************************************/
 /*************************************************************************/

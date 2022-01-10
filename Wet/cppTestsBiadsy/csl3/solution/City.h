@@ -39,40 +39,8 @@ namespace mtm
              */
             ~City() = default;
 
-            /**
-             * @brief Copy construct a new City object
-             * 
-             * @param city - city to be copied
-             */
-            City(const City& city);
-            
-            /**
-             * @brief Copy assigns city to this city
-             * 
-             * @param city City whose values are assigned to this city
-             * @return City& this city after assignment
-             */
-            City& operator=(const City& city);
-
-            /**
-             * @brief Removes all managers from all workplaces and all employees from all managers
-             * 
-             */
-            void resetCity();
-
-            /**
-             * @brief Copies the hierarchy of the given city into our city
-             * 
-             * @param city - City whose hierarchy will be copied
-             */
-            void copyHiring(const City& city);
-
-            /**
-             * @brief copies the given city to our city
-             * 
-             * @param city city to be copied
-             */
-            void copyCity(const City& city);
+            City(const City& city) = default;
+            City& operator=(const City& city) = default;
 
             //add methods
             /**

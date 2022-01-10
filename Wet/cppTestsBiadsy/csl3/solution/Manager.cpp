@@ -6,6 +6,7 @@
 using mtm::Manager;
 using std::pair;
 using std::set;
+using std::endl;
 
 namespace mtm
 {
@@ -49,13 +50,12 @@ namespace mtm
         throw mtm::EmployeeIsNotHired();
     }
     
-    void Manager::removeAllEmployees()
+    void Manager::chanageEmployeeSalary(int salary_to_add)
     {
         for (Employee* employee : employees)
         {
-            employee->setSalary(-(employee->getSalary()));
+            employee->setSalary(salary_to_add);
         }
-        employees.clear();
     }
 
     void Manager::emptyEmployeeGroup()
@@ -76,17 +76,19 @@ namespace mtm
     
     std::ostream& Manager::printShort(std::ostream& os) const
     {
-        os << this->getFirstName() << " " << this->getLastName() << "\n";
-        os << "Salary: " << salary << "\n";
+        os << this->getFirstName() << " " << this->getLastName() << endl;
+        os << "Salary: " << salary << endl;
         return os;
     }
 
     std::ostream& Manager::printLong(std::ostream& os) const
     {
-        os << this->getFirstName() << " " << this->getLastName() << "\n";
-        os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << "\n";
-        os << "Salary: " << salary << "\n";
-        os << "Employees: " << "\n";
+        os << this->getFirstName() << " " << this->getLastName() << endl;
+        os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << endl;
+        os << "Salary: " << salary << endl;
+        if(!employees.empty()){
+            os << "Employees: " << endl;
+        }
         for (Employee* employee : employees)
         {
             employee->printShort(os);

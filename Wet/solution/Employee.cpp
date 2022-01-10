@@ -4,6 +4,7 @@
 #define INIT_VALUE 0
 
 using mtm::Employee;
+using std::endl;
 
 namespace mtm
 {
@@ -72,15 +73,19 @@ namespace mtm
 
     std::ostream& Employee::printShort(std::ostream& os) const
     {
-        os << this->getFirstName() << " " << this->getLastName() << "\n";
-        os << "Salary: " << salary << " Score: " << score << "\n";
+        os << this->getFirstName() << " " << this->getLastName() << endl;
+        os << "Salary: " << salary << " Score: " << score << endl;
         return os;
     }
     std::ostream& Employee::printLong(std::ostream& os) const
     {
-        os << this->getFirstName() << " " << this->getLastName() << "\n";
-        os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << "\n";
-        os << "Salary: " << salary << " Score: " << score << " Skills:\n";
+        os << this->getFirstName() << " " << this->getLastName() << endl;
+        os << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << endl;
+        os << "Salary: " << salary << " Score: " << score;
+        if(!skill_set.empty()){
+            os << " Skills: ";
+        }
+        os << endl;
         for (Skill skill : skill_set)
         {
             os << skill;
